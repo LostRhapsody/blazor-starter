@@ -1,0 +1,76 @@
+@page "/InterviewPrep/Power"
+
+<p>A set of tools to build business applications.</p>
+<p>Not productivity tools, these are apps for businesses like databases, automated workflows, etc.</p>
+<p>A set of low-code tools, you don&#39;t need developers to write code to use these apps. It means experts of other areas can use these to assist in their areas of expertise.</p>
+<h1 id="power-apps">Power Apps</h1>
+<p>Allows low-code to no-code apps to be built for business applications. Can be used to build database applications and other things. Great for building UIs and apps where building the application fast and with fewer resources is more important than bespoke processes, speed, and fine-grained control.</p>
+<p>There are three types of apps:</p>
+<ol>
+<li>Canvas App<ol>
+<li>A blank canvas, can be designed from the ground-up, can use formulas to control the app.</li>
+<li>Connect to any data source, using various connectors, can build your own.</li>
+</ol>
+</li>
+<li>Model Driven Apps<ol>
+<li>Starts with a data model. Helps build the app as you know what kind of data you&#39;ll be using.</li>
+<li>Construct data tables and build relationships between them.</li>
+<li>Unlike canvas apps, we are building out the data model then using components to display the data in the app.</li>
+</ol>
+</li>
+<li>Portal<ol>
+<li>Used for interacting with customers, out in the world, with your data.</li>
+<li>Users can login to perform actions such as submitting a service ticket or editing account info.</li>
+<li>Good for customer service, or partners, or sales reps.</li>
+</ol>
+</li>
+</ol>
+<p>These app types tend to merge together. For instance, you can start with a blank canvas to build a custom page that doesn&#39;t match the rest of your pages in a model driven app. This allows for more flexibility. Think of adding an FAQ to section to an app that doesn&#39;t have any sort of design model for FAQs.</p>
+<h1 id="power-automate">Power Automate</h1>
+<p>Does four things:</p>
+<ol>
+<li>Cloud Flows<ol>
+<li>Trigger-action automation.</li>
+<li>When something happens, do something else. Can include conditional branches.</li>
+<li>Things like database read/write/create/delete triggers.</li>
+</ol>
+</li>
+<li>Business Process Flow<ol>
+<li>Guides users through stages/steps of processes.</li>
+<li>Great for training, HR, sales.</li>
+<li>Provides reporting and analytics.</li>
+</ol>
+</li>
+<li>Robotic Process Automation/Desktop Automation.<ol>
+<li>For automating across systems that we can&#39;t connect to programatically. </li>
+<li>Maybe legacy or old systems.</li>
+<li>Records your desktop (mouse clicks, keystrokes) so it can replicate those actions automatically. </li>
+</ol>
+</li>
+<li>Process Mining<ol>
+<li>Basically records and analyzes processes within your business.</li>
+<li>Helps identify bottlenecks and improve processes.</li>
+</ol>
+</li>
+</ol>
+<p>These can work together as well. </p>
+<h1 id="power-virtual-agents">Power Virtual Agents</h1>
+<p>Create no-code chat bots.</p>
+<p>Can put them on websites for help lines, or for internal things too. For instance: FAQs, help guides.</p>
+<p>Drag and drop interface. Already understands languages, so you can just provide trigger topics (versus the exact words) and it can process that and trigger a specific action for those topics.</p>
+<p>Bot can also take action based on the user. Things like authentication, querying, automate processes (returns, get information, login).</p>
+<h1 id="power-bi">Power BI</h1>
+<p>Used to gain insight and analyze your data. Connect this to any data source and build rich visualizations.</p>
+<h1 id="microsoft-dataverse">Microsoft Dataverse</h1>
+<p>It&#39;s a database that all power apps run on top of.</p>
+<p>It allows you to store data in the best way, and different types of data, including files, images, blobs.</p>
+<p>Runs on Azure cloud to optimize storage. It&#39;s all black-boxed to be user friendly.</p>
+<h1 id="ai-builder">AI Builder</h1>
+<p>Allows you to bring AI into your power apps with no code.</p>
+<p>There are some built in models to do things such as read a doc and extract data, classification of text, and more.</p>
+<h1 id="for-teams">For teams</h1>
+<p>We have dataverse built into Microsoft teams for collaboration, and power automate, and chat bots.</p>
+<h1 id="summary">Summary</h1>
+<p>These are not stand alone tools- they can all work together.</p>
+<p>For instance, virtual agents actually can use Power Automate Cloud Flows to perform certain actions.</p>
+<p>You can also bring Power Apps into Power BI so you can visualize the data of your power apps. The power app can then understand that context (?) and you can set that in the context of your report.</p>

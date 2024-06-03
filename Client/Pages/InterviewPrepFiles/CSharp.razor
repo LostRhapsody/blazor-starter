@@ -1,0 +1,498 @@
+@page "/InterviewPrep/CSharp"
+
+<h1>C# Notes</h1>
+<p>These are some notes I took for C# to prepare for this interview. I'm familiar with C# and have used it several
+    times, but never at a workplace, so I'm a bit rusty.</p>
+<p>To start, Visual C# and C# are the same thing. Visual C# is just a marketing name for it, or sometimes used to refer
+    to C# when used in conjunction with Visual Studio.</p>
+<p>It's commonly used for:</p>
+<ul>
+    <li>Mobile and desktop apps</li>
+    <li>Web apps and services</li>
+    <li>Games, including VR</li>
+    <li>Database applications and business logic</li>
+</ul>
+<p>OOP, big community, lots of first and third-party support. Familiar with Java and C++, making it easier for
+    developers to switch between them.</p>
+
+<h2>Basic Syntax</h2>
+<p>Start a program by importing required libraries, called "Namespaces" in C#. This almost always includes the
+    <code>System</code> namespace.</p>
+<pre><code class="language-csharp">using System;</code></pre>
+<p>Then declare a namespace and your classes, methods, and logic:</p>
+<pre><code class="language-csharp">using System;
+
+namespace HelloWorld
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+        }
+    }
+}</code></pre>
+<blockquote>
+    <p>Hint: If you left out <code>using System</code> you could just call the <code>WriteLine</code> method using
+        <code>System.Console.WriteLine</code>. The <code>Write</code> method is similar, but doesn't add a new line feed
+        to the end of the output.</p>
+</blockquote>
+<p><strong>C# is case sensitive.</strong></p>
+<p>The name of the file does not have to match the name of the class, but they do, for organization. Save the file with
+    the extension <code>.cs</code>.</p>
+<p>C# has both inline comments:</p>
+<pre><code class="language-csharp">// I'm a C# Comment</code></pre>
+<p>And block comments:</p>
+<pre><code class="language-csharp">/*
+Multi-line comment
+*/</code></pre>
+
+<h2>Common Datatypes</h2>
+<p>C# uses <code>int</code>, <code>long</code>,<code>float</code>,<code>double</code>, <code>char</code>,
+    <code>string</code>, and <code>bool</code>, to start.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Size</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>int</td>
+            <td>4 bytes</td>
+            <td>Stores whole numbers from -2,147,483,648 to 2,147,483,647</td>
+        </tr>
+        <tr>
+            <td>long</td>
+            <td>8 bytes</td>
+            <td>-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807</td>
+        </tr>
+        <tr>
+            <td>float</td>
+            <td>4 bytes</td>
+            <td>fractional numbers, can store 6 to 7 decimal digits.</td>
+        </tr>
+        <tr>
+            <td>double</td>
+            <td>8 bytes</td>
+            <td>sufficient for storing 15 decimal digits</td>
+        </tr>
+        <tr>
+            <td>bool</td>
+            <td>1 bit</td>
+            <td>Stores true or false values</td>
+        </tr>
+        <tr>
+            <td>char</td>
+            <td>2 bytes</td>
+            <td>Stores a single character, or letter, surrounded by quotes</td>
+        </tr>
+        <tr>
+            <td>string</td>
+            <td>2 bytes per character</td>
+            <td>A sequence of characters, surrounded by double quotes.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Variables</h2>
+<p>Declare a variable using:</p>
+<pre><code class="language-csharp">// type varName = value;
+string name = "John";</code></pre>
+<p><code>double</code> types will need to be ended with a 'D':</p>
+<pre><code class="language-csharp">double myNum = 5.99D;</code></pre>
+<p><code>float</code> types will need to be ended with a 'F':</p>
+<pre><code class="language-csharp">float myNum = 5.75F;</code></pre>
+<p>These are called <strong>literal suffixes</strong>. Use <code>m</code> to create a literal decimal.</p>
+<p>They can also represent scientific numbers:</p>
+<pre><code class="language-csharp">float f1 = 35e3F;
+double d1 = 12E4D;</code></pre>
+
+<h3>Constants</h3>
+<p>Declare a constant using:</p>
+<pre><code class="language-csharp">const int myNum = 15;</code></pre>
+<p>Can't be changed.</p>
+
+<h3>Output a variable</h3>
+<p>Output a variable by concatenating to a string:</p>
+<pre><code class="language-csharp">string name = "John";
+Console.WriteLine("Hello " + name);</code></pre>
+
+<h3>Declare many vars</h3>
+<pre><code class="language-csharp">int x = 5, y = 4, z = 3;</code></pre>
+
+<h3>Naming Convention</h3>
+<ul>
+    <li>Can contain letters, digits, and underscore</li>
+    <li>Must begin with lowercase or an underscore</li>
+    <li>Should start with a lowercase letter</li>
+    <li>Are case sensitive</li>
+    <li>Reserved keywords cannot be var names</li>
+</ul>
+
+<h3>Casting</h3>
+<ul>
+    <li><strong>Implicit Casting</strong> (automatically) - converting a smaller type to a larger type size</li>
+    <ul>
+        <li><code>char</code> -> <code>int</code> -> <code>long</code> -> <code>float</code> -> <code>double</code></li>
+    </ul>
+    <li><strong>Explicit Casting</strong> (manually) - converting a larger type to a smaller size type</li>
+    <ul>
+        <li><code>double</code> -> <code>float</code> -> <code>long</code> -> <code>int</code> -> <code>char</code></li>
+    </ul>
+</ul>
+
+<h3>Type Conversion Methods</h3>
+<ul>
+    <li><code>Convert.ToString</code></li>
+    <li><code>Convert.ToDouble</code></li>
+    <li><code>Convert.ToInt32</code></li>
+</ul>
+
+<h2>User Input</h2>
+<p>Accept input from users.</p>
+
+<h3>Get User Input</h3>
+<p><code>Console.ReadLine</code></p>
+
+<h3>User Input and Numbers</h3>
+<p><code>ReadLine</code> returns a string, so you have to cast it to an int or whatever. If the user enters the wrong
+    value though and can't be converted, expect this and catch the error.</p>
+
+<h2>Operators</h2>
+
+<h3>Arithmetic</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Operator</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Example</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>+</td>
+            <td>Addition</td>
+            <td>Adds together two values</td>
+            <td>x + y</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>Subtraction</td>
+            <td>Subtracts one value from another</td>
+            <td>x - y</td>
+        </tr>
+        <tr>
+            <td>*</td>
+            <td>Multiplication</td>
+            <td>Multiplies two values</td>
+            <td>x * y</td>
+        </tr>
+        <tr>
+            <td>/</td>
+            <td>Division</td>
+            <td>Divides one value by another</td>
+            <td>x / y</td>
+        </tr>
+        <tr>
+            <td>%</td>
+            <td>Modulus</td>
+            <td>Returns the division remainder</td>
+            <td>x % y</td>
+        </tr>
+        <tr>
+            <td>++</td>
+            <td>Increment</td>
+            <td>Increases the value of a variable by 1</td>
+            <td>x++</td>
+        </tr>
+        <tr>
+            <td>--</td>
+            <td>Decrement</td>
+            <td>Decreases the value of a variable by 1</td>
+            <td>x--</td>
+        </tr>
+    </tbody>
+</table>
+<p>Funny thing about arithmetic in C#...</p>
+<p>When you are writing a formula using literal numbers, make sure the numbers you are using are the same data type as
+    the variable they are being assigned to.</p>
+<p>For example, if you are storing the result in a float, ensure that your literal numbers are using the 'f' suffix.
+    Example:</p>
+<pre><code class="language-csharp">int fahrenheit = 94;
+
+float cels = (fahrenheit - 32f) * (5f/9f);
+
+Console.WriteLine(cels);</code></pre>
+
+<h3>Assignment</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Operator</th>
+            <th>Example</th>
+            <th>Same As</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>=</td>
+            <td>x = 5</td>
+            <td>x = 5</td>
+        </tr>
+        <tr>
+            <td>+=</td>
+            <td>x += 3</td>
+            <td>x = x + 3</td>
+        </tr>
+        <tr>
+            <td>-=</td>
+            <td>x -= 3</td>
+            <td>x = x - 3</td>
+        </tr>
+        <tr>
+            <td>*=</td>
+            <td>x *= 3</td>
+            <td>x = x * 3</td>
+        </tr>
+        <tr>
+            <td>/=</td>
+            <td>x /= 3</td>
+            <td>x = x / 3</td>
+        </tr>
+        <tr>
+            <td>%=</td>
+            <td>x %= 3</td>
+            <td>x = x % 3</td>
+        </tr>
+        <tr>
+            <td>&amp;=</td>
+            <td>x &amp;= 3</td>
+            <td>x = x &amp; 3</td>
+        </tr>
+        <tr>
+            <td>|=</td>
+            <td>x |= 3</td>
+            <td>x = x | 3</td>
+        </tr>
+        <tr>
+            <td>^=</td>
+            <td>x ^= 3</td>
+            <td>x = x ^ 3</td>
+        </tr>
+        <tr>
+            <td>>>=</td>
+            <td>x >>= 3</td>
+            <td>x = x >> 3</td>
+        </tr>
+        <tr>
+            <td>&lt;&lt;=</td>
+            <td>x &#60;&#60;= 3</td>
+            <td>x = x &#60;&#60; 3</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Comparison</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Operator</th>
+            <th>Name</th>
+            <th>Example</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>==</td>
+            <td>Equal to</td>
+            <td>x == y</td>
+        </tr>
+        <tr>
+            <td>!=</td>
+            <td>Not equal</td>
+            <td>x != y</td>
+        </tr>
+        <tr>
+            <td>></td>
+            <td>Greater than</td>
+            <td>x > y</td>
+        </tr>
+        <tr>
+            <td>&#60;
+                </td>
+            <td>Less than</td>
+            <td>x &#60; y</td>
+        </tr>
+        <tr>
+            <td>>=</td>
+            <td>Greater than or equal to</td>
+            <td>x >= y</td>
+        </tr>
+        <tr>
+            <td>&lt;=</td>
+            <td>Less than or equal to</td>
+            <td>x &#60;= y</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Escape Sequences</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Escape sequence</th>
+            <th>Character name</th>
+            <th>Unicode encoding</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>&#92;&#39;</td>
+            <td>Single quote</td>
+            <td>0x0027</td>
+        </tr>
+        <tr>
+            <td>&#92;&quot;</td>
+            <td>Double quote</td>
+            <td>0x0022</td>
+        </tr>
+        <tr>
+            <td>&#92;Backslash</td>
+            <td>0x005C</td>
+        </tr>
+        <tr>
+            <td>&#92;0</td>
+            <td>Null</td>
+            <td>0x0000</td>
+        </tr>
+        <tr>
+            <td>&#92;a</td>
+            <td>Alert</td>
+            <td>0x0007</td>
+        </tr>
+        <tr>
+            <td>&#92;b</td>
+            <td>Backspace</td>
+            <td>0x0008</td>
+        </tr>
+        <tr>
+            <td>&#92;f</td>
+            <td>Form feed</td>
+            <td>0x000C</td>
+        </tr>
+        <tr>
+            <td>&#92;n</td>
+            <td>New line</td>
+            <td>0x000A</td>
+        </tr>
+        <tr>
+            <td>&#92;r</td>
+            <td>Carriage return</td>
+            <td>0x000D</td>
+        </tr>
+        <tr>
+            <td>&#92;t</td>
+            <td>Horizontal tab</td>
+            <td>0x0009</td>
+        </tr>
+        <tr>
+            <td>&#92;v</td>
+            <td>Vertical tab</td>
+            <td>0x000B</td>
+        </tr>
+        <tr>
+            <td>&#92;u</td>
+            <td>Unicode escape sequence (UTF-16)</td>
+            <td>&#92;uHHHH (range: 0000 - FFFF; example: &#92;u00E7 = "ç")</td>
+        </tr>
+        <tr>
+            <td>&#92;U</td>
+            <td>Unicode escape sequence (UTF-32)</td>
+            <td>&#92;U00HHHHHH (range: 000000 - 10FFFF; example: &#92;U0001F47D = "👽")</td>
+        </tr>
+        <tr>
+            <td>&#92;x</td>
+            <td>Unicode escape sequence similar to "\u" except with variable length</td>
+            <td>&#92;xH[H][H][H] (range: 0 - FFFF; example: &#92;x00E7 or &#92;x0E7 or &#92;xE7 = "ç")</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Interview Questions and Answers practice</h2>
+<blockquote>
+    <p>Can <code>this</code> be used in a static method?</p>
+    <p>No. It references the current instance, and a static method does not belong to any particular instance.</p>
+</blockquote>
+<hr>
+<blockquote>
+    <p>Different types of classes</p>
+    <p>Partial - members can be divided or shared with multiple .cs files.<br>
+        Sealed - class cannot be inherited.<br>
+        Abstract - class whose object cannot be instantiated, only inherited. Should contain at least one method.<br>
+        Static - does not allow inheritance. Members of the class are static.</p>
+</blockquote>
+<hr>
+<blockquote>
+    <p>Difference between struct and class</p>
+    <p>struct is a value type. Inherits from System.Value.<br>
+        Usually for smaller amounts of data<br>
+        Can't be inherited to another type.<br>
+        Can't be abstract.</p>
+    <p>Class is ref type. Inherits from System.Object.<br>
+        Usually for larger amounts of data.<br>
+        Can be inherited.<br>
+        Can be abstract.<br>
+        Can create a default constructor.</p>
+</blockquote>
+<hr>
+<blockquote>
+    <p>What is the virtual keyword for</p>
+    <p>Use while defining a class to specify methods and props of class can be overridden in derived classes</p>
+</blockquote>
+<hr>
+<blockquote>
+    <p>Finally block</p>
+    <p>Used at the end of a try-catch-finally block, good for cleanup tasks such as disconnect from DB, or releasing
+        file handlers.</p>
+</blockquote>
+<hr>
+<blockquote>
+    <p>Use throw or throw ex to throw an exception.</p>
+    <p>throw ex (where ex is the var from the catch block) will throw the exception and begin the output of the error at
+        that exception, where throw will give you the whole stacktrace.</p>
+    <pre><code class="language-csharp">try {
+    ...
+} catch(Exception ex){
+    throw ex;
+    // or just throw
+}</code></pre>
+</blockquote>
+<hr>
+<blockquote>
+    <p>How would you reverse the order of a sentence?</p>
+    <p>Reverse the whole string, then reverse each individual word. So reverse the string, then break the string into an
+        array, each word being its own element, and reverse each of them one at a time, then combine them back into a
+        single string. Instead of an array, you could also just loop through the string and track the index of each
+        space so you can find the start/end of each word, but coming from a more "javascript" approach, it's easier to
+        break into an array and iterate through each element.</p>
+</blockquote>
+<hr>
+<blockquote>
+    <p>Difference between == and Equals()</p>
+    <p>== (Reference Equals) compares the ref identity while Equals (virtual equals) method compares if two objects are
+        equivalent.</p>
+</blockquote>
+<hr>
+<blockquote>
+    <p>Use of ??</p>
+    <p>Null coalescing operator, defines a default value for nullable types or ref types. The code below will output
+        "Evan" because name is null.</p>
+    <pre><code class="language-csharp">string name = null;
+string myname = name ?? "Evan";
+Console.WriteLine(myname);</code></pre>
+</blockquote>

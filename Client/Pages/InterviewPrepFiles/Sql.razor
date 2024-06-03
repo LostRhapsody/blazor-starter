@@ -1,0 +1,493 @@
+@page "/InterviewPrep/Sql"
+
+<p>SQL - Structured Query Language for manipulating databases.</p>
+<h1 id="ways-to-use-it">Ways to use it</h1>
+<ul>
+<li>A RDBMS database program (MS Access, SQL Server, MySQL)</li>
+<li>A server side scripting language like PHP or ASP.</li></ul>
+<h2 id="rdbms">RDBMS</h2>
+Relational Database Management System.<h1 id="important-commands">Important commands</h1>
+<ul>
+<li><code>SELECT</code> - extracts data from a database</li>
+<li><code>UPDATE</code> - updates data in a database</li>
+<li><code>DELETE</code> - deletes data from a database</li>
+<li><code>INSERT INTO</code> - inserts new data into a database</li>
+<li><code>CREATE DATABASE</code> - creates a new database</li>
+<li><code>ALTER DATABASE</code> - modifies a database</li>
+<li><code>CREATE TABLE</code> - creates a new table</li>
+<li><code>ALTER TABLE</code> - modifies a table</li>
+<li><code>DROP TABLE</code> - deletes a table</li>
+<li><code>CREATE INDEX</code> - creates an index (search key)</li>
+<li><code>DROP INDEX</code> - deletes an index</li>
+</ul>
+<h1 id="commands-i-don-t-know-well">Commands I don&#39;t know well</h1>
+<h2 id="select-distinct">Select Distinct</h2>
+This is like a normal select statement, but only returns ones that are distinct/different, so no repeats.<h2 id="order-by">Order by</h2>
+Sorts by ascending or descending order. Defaults to ascending.Use <code>DESC</code> to sort by descending. Sorts alphabetically for strings.
+<p>Sorting multiple columns:
+The following SQL statement selects all customers from the &quot;Customers&quot; table, sorted by the &quot;Country&quot; and the &quot;CustomerName&quot; column. This means that it orders by Country, but if some rows have the same Country, it orders them by CustomerName:</p>
+<pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> customers
+<span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> country, customerName;
+</code></pre>
+<h2 id="insert-into">Insert into</h2>
+<p>Used to add new records into a table in the database.
+Two ways you can use it:</p>
+<ol>
+<li>Specify the table name, column names, and values:<pre><code class="lang-sql">INSERT INTO _table_name_ (<span class="hljs-name">_column1_</span>, _column2_, _column3_, ...)   VALUES (<span class="hljs-name">_value1_</span>, _value2_, _value3_, ...)<span class="hljs-comment">;</span>
+</code></pre>
+</li>
+<li>Don&#39;t<pre><code class="lang-sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> _table_name_   <span class="hljs-keyword">VALUES</span> (_value1_, _value2_, _value3_, ...);
+</code></pre>
+</li>
+</ol>
+<p>So... second way is way to cocky and dumb right? This is if you&#39;re adding values for all columns of the table, in which case you don&#39;t need to specify them, just make sure they are in the right order or you&#39;re effed.</p>
+<p>To insert multiple rows, just include a new <code>(value1, value2),</code> statement after the first:</p>
+<pre><code class="lang-sql"><span class="hljs-selector-tag">VALUES</span>  
+(<span class="hljs-string">'Cardinal'</span>, <span class="hljs-string">'Tom B. Erichsen'</span>, <span class="hljs-string">'Skagen 21'</span>, <span class="hljs-string">'Stavanger'</span>, <span class="hljs-string">'4006'</span>, <span class="hljs-string">'Norway'</span>),  
+(<span class="hljs-string">'Greasy Burger'</span>, <span class="hljs-string">'Per Olsen'</span>, <span class="hljs-string">'Gateveien 15'</span>, <span class="hljs-string">'Sandnes'</span>, <span class="hljs-string">'4306'</span>, <span class="hljs-string">'Norway'</span>);
+</code></pre>
+<h2 id="null-values">Null values</h2>
+<p>Use <code>IS NULL</code> or <code>IS NOT NULL</code> to test for NULL values in the database. Null means no value.</p>
+<h2 id="update">Update</h2>
+<pre><code class="lang-sql"><span class="hljs-keyword">UPDATE</span> _table_name_   <span class="hljs-keyword">SET</span> _column1_ = _value1_, _column2_ = _value2_, ...   <span class="hljs-keyword">WHERE</span> _condition_;
+</code></pre>
+<p>Used to modify existing records in a table.</p>
+<p>The <code>where</code> clause specifies what records to update. It&#39;s like a select clause that grabs the records, performs the update, and releases them. Very easy to mess up. Use a select first to make sure you&#39;re getting the correct records.</p>
+<p>If you omit the <code>where</code> clause, all records are updated. Powerful, but dangerous.</p>
+<h2 id="select-top-limit-fetch-first-rownum">Select TOP, LIMIT, Fetch First, Rownum</h2>
+<p><code>Select Top</code> is used to specify the number of records to return.</p>
+<pre><code class="lang-sql"><span class="hljs-keyword">select</span> top <span class="hljs-number">3</span> * <span class="hljs-keyword">from</span> customers;
+</code></pre>
+<p>Only returns 3 customer records.</p>
+<blockquote>
+<p>Not all databases support this. MySQL uses <code>LIMIT</code> instead. Oracle uses <code>FETCH FIRST n rows</code> and <code>rownum</code>.</p>
+</blockquote>
+<p>You can also use <code>top 50 percent</code> to get 50% of the records.</p>
+<h2 id="aggregate-functions">Aggregate functions</h2>
+<p>friendly reminder you can use <code>min, max, count, sum, and avg</code> in conjunction with select and group by to add up specific fields. Like adding up all the debt owed by all customer records.</p>
+<h2 id="like">Like</h2>
+<p>Basically instead of &quot;equals&quot;, you can match to a pattern instead. Select all customers whose names start with &quot;a&quot;.</p>
+<pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> Customers  
+<span class="hljs-keyword">WHERE</span> CustomerName <span class="hljs-keyword">LIKE</span> <span class="hljs-string">'a%'</span>;
+</code></pre>
+<h2 id="wildcards">Wildcards</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%</td>
+<td>Represents zero or more characters</td>
+</tr>
+<tr>
+<td>_</td>
+<td>Represents a single character</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>Represents any single character within the brackets *</td>
+</tr>
+<tr>
+<td>^</td>
+<td>Represents any character not in the brackets *</td>
+</tr>
+<tr>
+<td>-</td>
+<td>Represents any single character within the specified range *</td>
+</tr>
+<tr>
+<td>{}</td>
+<td>Represents any escaped character **</td>
+</tr>
+</tbody>
+</table>
+<p>* Not supported in PostgreSQL and MySQL databases.
+** Supported only in Oracle databases.</p>
+<h2 id="join">Join</h2>
+<p>used to combine two rows from two tables based on shared data.
+Example:</p>
+<p>Order table:</p>
+<table>
+<thead>
+<tr>
+<th>OrderID</th>
+<th>CustomerID</th>
+<th>OrderDate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10308</td>
+<td>2</td>
+<td>1996-09-18</td>
+</tr>
+<tr>
+<td>10309</td>
+<td>37</td>
+<td>1996-09-19</td>
+</tr>
+<tr>
+<td>10310</td>
+<td>77</td>
+<td>1996-09-20</td>
+</tr>
+</tbody>
+</table>
+<p>Customer table:</p>
+<table>
+<thead>
+<tr>
+<th>CustomerID</th>
+<th>CustomerName</th>
+<th>ContactName</th>
+<th>Country</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Alfreds Futterkiste</td>
+<td>Maria Anders</td>
+<td>Germany</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Ana Trujillo Emparedados y helados</td>
+<td>Ana Trujillo</td>
+<td>Mexico</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Antonio Moreno Taquería</td>
+<td>Antonio Moreno</td>
+<td>Mexico</td>
+</tr>
+</tbody>
+</table>
+<p>Query:</p>
+<pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> Orders.OrderID, Customers.CustomerName, Orders.OrderDate  
+<span class="hljs-keyword">FROM</span> Orders  
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> Customers <span class="hljs-keyword">ON</span> Orders.CustomerID=Customers.CustomerID;
+</code></pre>
+<p>Produces:</p>
+<table>
+<thead>
+<tr>
+<th>OrderID</th>
+<th>CustomerName</th>
+<th>OrderDate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10308</td>
+<td>Ana Trujillo Emparedados y helados</td>
+<td>9/18/1996</td>
+</tr>
+<tr>
+<td>10365</td>
+<td>Antonio Moreno Taquería</td>
+<td>11/27/1996</td>
+</tr>
+<tr>
+<td>10383</td>
+<td>Around the Horn</td>
+<td>12/16/1996</td>
+</tr>
+<tr>
+<td>10355</td>
+<td>Around the Horn</td>
+<td>11/15/1996</td>
+</tr>
+<tr>
+<td>10278</td>
+<td>Berglunds snabbköp</td>
+<td>8/12/1996</td>
+</tr>
+</tbody>
+</table>
+<h3 id="inner-join">Inner join</h3>
+<p>Returns records that have matching values in BOTH sides.</p>
+<h3 id="left-join">Left join</h3>
+<p>Returns all records from the left table and the matched records in the right.</p>
+<h3 id="right-join">Right join</h3>
+<p>Returns all records from the right table and the matched records in the left.</p>
+<h3 id="full-outer-join">Full outer join</h3>
+<p>Returns all records when there is a match on either the left, or right, side.</p>
+<blockquote>
+<p>Full join and Full outer join are the same.</p>
+</blockquote>
+<h3 id="self-join">Self join</h3>
+<p>A regular join but the table is joined with itself.</p>
+<p>The following SQL statement matches customers that are from the same city:</p>
+<pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> A.CustomerName <span class="hljs-keyword">AS</span> CustomerName1, B.CustomerName <span class="hljs-keyword">AS</span> CustomerName2, A.City  
+<span class="hljs-keyword">FROM</span> Customers A, Customers B  
+<span class="hljs-keyword">WHERE</span> A.CustomerID &lt;&gt; B.CustomerID  
+<span class="hljs-keyword">AND</span> A.City = B.City  
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> A.City;
+</code></pre>
+<h2 id="union">Union</h2>
+<p>Used to combine the results of two or more select statements. They must have the same number of columns. The columns must have similar data types. The columns must be in the same order.</p>
+<blockquote>
+<p>By default it only returns distinct records, to all duplicates use <code>Union All</code>.</p>
+</blockquote>
+<pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> City <span class="hljs-keyword">FROM</span> Customers  
+<span class="hljs-keyword">UNION</span>  
+<span class="hljs-keyword">SELECT</span> City <span class="hljs-keyword">FROM</span> Suppliers  
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> City;
+</code></pre>
+<h2 id="having">Having</h2>
+<p>It&#39;s the <code>where</code> clause clone we use for aggregate functions, as where can&#39;t be used in them.</p>
+<p>The following SQL statement lists the number of customers in each country. Only include countries with more than 5 customers:</p>
+<pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">COUNT</span>(CustomerID), Country  
+<span class="hljs-keyword">FROM</span> Customers  
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> Country  
+<span class="hljs-keyword">HAVING</span> <span class="hljs-keyword">COUNT</span>(CustomerID) &gt; <span class="hljs-number">5</span>;
+</code></pre>
+<h2 id="exists">Exists</h2>
+<p>Used to test if a record exists in a subquery:</p>
+<pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> _column_name(s)_  
+<span class="hljs-keyword">FROM</span> _table_name_  
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">EXISTS</span>  
+(<span class="hljs-keyword">SELECT</span> _column_name_ <span class="hljs-keyword">FROM</span> _table_name_ <span class="hljs-keyword">WHERE</span> _condition_);
+</code></pre>
+<p>The following SQL statement returns TRUE and lists the suppliers with a product price less than 20:</p>
+<pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> SupplierName  
+<span class="hljs-keyword">FROM</span> Suppliers  
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">EXISTS</span> (<span class="hljs-keyword">SELECT</span> ProductName <span class="hljs-keyword">FROM</span> Products <span class="hljs-keyword">WHERE</span> Products.SupplierID = Suppliers.supplierID <span class="hljs-keyword">AND</span> Price &lt; <span class="hljs-number">20</span>);
+</code></pre>
+<h2 id="any-and-all">Any and All</h2>
+<p>The following SQL statement lists the <code>ProductName</code> if it finds ANY records in the <code>OrderDetails</code> table has Quantity equal to 10 (this will return TRUE because the Quantity column has some values of 10):</p>
+<pre><code class="lang-sql"><span class="hljs-keyword">SELECT</span> ProductName  
+<span class="hljs-keyword">FROM</span> Products  
+<span class="hljs-keyword">WHERE</span> ProductID = <span class="hljs-keyword">ANY</span>  
+  (<span class="hljs-keyword">SELECT</span> ProductID  
+  <span class="hljs-keyword">FROM</span> OrderDetails  
+  <span class="hljs-keyword">WHERE</span> Quantity = <span class="hljs-number">10</span>);
+</code></pre>
+<p>All accomplishes the same thing, except it only if ALL the records in the <code>OrderDetails</code> table has a quantity equal to 10. </p>
+<h1 id="stored-procedures">Stored Procedures</h1>
+<p>SQL code you can store and use over and over. Like a function.</p>
+<pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-function"><span class="hljs-keyword">PROCEDURE</span> _<span class="hljs-title">procedure_name_</span>  
+<span class="hljs-title">AS</span>  
+_<span class="hljs-title">sql_statement_</span>  
+<span class="hljs-title">GO</span>;</span>
+-- <span class="hljs-keyword">to</span> use:
+EXEC procedure_name;
+
+-- <span class="hljs-keyword">with</span> multiple <span class="hljs-keyword">params</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-function"><span class="hljs-keyword">PROCEDURE</span> <span class="hljs-title">SelectAllCustomers</span> &#64;<span class="hljs-title">City</span> <span class="hljs-title">nvarchar</span><span class="hljs-params">(30)</span>, &#64;<span class="hljs-title">PostalCode</span> <span class="hljs-title">nvarchar</span><span class="hljs-params">(10)</span>  
+<span class="hljs-title">AS</span>  
+<span class="hljs-title">SELECT</span> * <span class="hljs-title">FROM</span> <span class="hljs-title">Customers</span> <span class="hljs-title">WHERE</span> <span class="hljs-title">City</span> = &#64;<span class="hljs-title">City</span> <span class="hljs-title">AND</span> <span class="hljs-title">PostalCode</span> = &#64;<span class="hljs-title">PostalCode</span>  
+<span class="hljs-title">GO</span>;</span>
+
+-- <span class="hljs-keyword">to</span> use:
+EXEC SelectAllCustomers &#64;City = <span class="hljs-string">'London'</span>, &#64;PostalCode = <span class="hljs-string">'WA1 1DP'</span>;
+</code></pre>
+<h1 id="comments">Comments</h1>
+<p>supports inline <code>--</code> and multi-line <code>/**/</code>.</p>
+<h1 id="operators">Operators</h1>
+<h2 id="sql-arithmetic-operators">SQL Arithmetic Operators</h2>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+</td>
+<td>Add</td>
+</tr>
+<tr>
+<td>-</td>
+<td>Subtract</td>
+</tr>
+<tr>
+<td>*</td>
+<td>Multiply</td>
+</tr>
+<tr>
+<td>/</td>
+<td>Divide</td>
+</tr>
+<tr>
+<td>%</td>
+<td>Modulo</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sql-bitwise-operators">SQL Bitwise Operators</h2>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&amp;</td>
+<td>Bitwise AND</td>
+</tr>
+<tr>
+<td>\</td>
+<td></td>
+<td>Bitwise OR</td>
+</tr>
+<tr>
+<td>^</td>
+<td>Bitwise exclusive OR</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sql-comparison-operators">SQL Comparison Operators</h2>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=</td>
+<td>Equal to</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>Greater than</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>Less than</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>Greater than or equal to</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>Less than or equal to</td>
+</tr>
+<tr>
+<td>&lt;&gt;</td>
+<td>Not equal to</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sql-compound-operators">SQL Compound Operators</h2>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+=</td>
+<td>Add equals</td>
+</tr>
+<tr>
+<td>-=</td>
+<td>Subtract equals</td>
+</tr>
+<tr>
+<td>*=</td>
+<td>Multiply equals</td>
+</tr>
+<tr>
+<td>/=</td>
+<td>Divide equals</td>
+</tr>
+<tr>
+<td>%=</td>
+<td>Modulo equals</td>
+</tr>
+<tr>
+<td>&amp;=</td>
+<td>Bitwise AND equals</td>
+</tr>
+<tr>
+<td>^-=</td>
+<td>Bitwise exclusive equals</td>
+</tr>
+<tr>
+<td>\</td>
+<td>*=</td>
+<td>Bitwise OR equals</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sql-logical-operators">SQL Logical Operators</h2>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALL</td>
+<td>TRUE if all of the subquery values meet the condition</td>
+</tr>
+<tr>
+<td>AND</td>
+<td>TRUE if all the conditions separated by AND is TRUE</td>
+</tr>
+<tr>
+<td>ANY</td>
+<td>TRUE if any of the subquery values meet the condition</td>
+</tr>
+<tr>
+<td>BETWEEN</td>
+<td>TRUE if the operand is within the range of comparisons</td>
+</tr>
+<tr>
+<td>EXISTS</td>
+<td>TRUE if the subquery returns one or more records</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>TRUE if the operand is equal to one of a list of expressions</td>
+</tr>
+<tr>
+<td>LIKE</td>
+<td>TRUE if the operand matches a pattern</td>
+</tr>
+<tr>
+<td>NOT</td>
+<td>Displays a record if the condition(s) is NOT TRUE</td>
+</tr>
+<tr>
+<td>OR</td>
+<td>TRUE if any of the conditions separated by OR is TRUE</td>
+</tr>
+<tr>
+<td>SOME</td>
+<td>TRUE if any of the subquery values meet the condition</td>
+</tr>
+</tbody>
+</table>
+<h1 id="database">Database</h1>
+<p>Some database-centric commands I&#39;m not familiar with.</p>
+<h2 id="constraints">Constraints</h2>
+<p>Add a constraint to a column when creating/altering a table.</p>
+<ul>
+<li>NOT NULL - Ensures that a column cannot have a NULL value</li>
+<li>UNIQUE - Ensures that all values in a column are different</li>
+<li>PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table</li>
+<li>FOREIGN KEY - Prevents actions that would destroy links between tables</li>
+<li>CHECK - Ensures that the values in a column satisfies a specific condition</li>
+<li>DEFAULT - Sets a default value for a column if no value is specified</li>
+<li>CREATE INDEX - Used to create and retrieve data from the database very quickly</li>
+</ul>
+<h2 id="foreign-key">Foreign key</h2>
+Refers to a primary key in another table. The constraint for this prevents actions that would destroy the link between two tables.

@@ -1,0 +1,964 @@
+@page "/InterviewPrep/Php"
+
+<p>PHP stands for &quot;PHP: Hypertext Preprocessor&quot; and I hate it so much. Not the language, just the acronym. The
+    gall that the P in PHP stands... for PHP. It&#39;s recursive, and I hate it.</p>
+<p>It&#39;s a server side language. A PHP file can contain text, HTML, CSS, JavaScript, and PHP code. The code is
+    executed on the server, and the result is returned to the browser as plain HTML. The files have the extension
+    <code>.php</code>.
+</p>
+<p>It can generate dynamic page content, create, open, read, write, delete, and close files on the server, collect form
+    data, send and receive cookies, add, delete, modify data in a DB, control user access, encrypt data, and more.</p>
+<p>You can output HTML, images, PDF files, text, XHTML, XML, etc.</p>
+<p>It runs on most platforms, is compatible with almost all servers, supports a wide range of databases, is free, and is
+    easy to learn.</p>
+<p>PHP 7 is faster, has better error handling, stricter type definitions, and supports some new operators (like the
+    spaceship operate <code>&lt;=&gt;</code>).</p>
+<h1 id="basic-syntax">Basic Syntax</h1>
+<p>A script starts with <code>&lt;?php</code> an ends with <code>?&gt;</code>.</p>
+<p>Example file:</p>
+<pre><code class="lang-php"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>My first PHP page<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+
+<span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"Hello World!"</span>;
+<span class="hljs-meta">?&gt;</span></span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p>It&#39;s HTML, with PHP inside the body tag.</p>
+<h2 id="case-sensitivity">Case Sensitivity</h2>
+<p>Keywords, classes, functions, and user-defined functions are not case sensitive.
+    These are all the same:</p>
+<pre><code class="lang-php"><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">ECHO</span> <span class="hljs-string">"Hello World!&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"Hello World!&lt;br&gt;"</span>;
+<span class="hljs-keyword">EcHo</span> <span class="hljs-string">"Hello World!&lt;br&gt;"</span>;
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre>
+<blockquote>
+    <p>All variables <strong>are</strong> case sensitive.</p>
+</blockquote>
+<h2 id="comments">Comments</h2>
+<pre><code class="lang-php"><span class="hljs-comment">// This is a single-line comment</span>
+
+<span class="hljs-meta"># This is also a single-<span class="hljs-meta-keyword">line</span> comment</span>
+
+<span class="hljs-comment">/* This is a
+multi-line comment */</span>
+</code></pre>
+<h2 id="variables">Variables</h2>
+<p>Declare with <code>$</code>:</p>
+<pre><code class="lang-php"><span class="hljs-meta"><span class="hljs-meta-keyword">$x</span> = 5;</span>
+<span class="hljs-meta"><span class="hljs-meta-keyword">$y</span> = "John"</span>
+</code></pre>
+<p>There is no definition statement- The variable is declared the first time it&#39;s assigned a value.</p>
+<p>Naming:</p>
+<ul>
+    <li>Must start with $.</li>
+    <li>Must start with a letter or underscore, not a number.</li>
+    <li>Can only contain A-z, 0-9, and _</li>
+    <li>Case sensitive</li>
+</ul>
+<h2 id="output">Output</h2>
+Use the <code>echo</code> statement.
+<pre><code class="lang-php">$text = <span class="hljs-string">"World"</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"Hello $text!"</span>;
+<span class="hljs-comment">// or</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"Hello "</span> . $text . <span class="hljs-string">"!"</span>;
+<span class="hljs-comment">// and</span>
+$x = <span class="hljs-number">1</span>;
+$y = <span class="hljs-number">2</span>;
+<span class="hljs-keyword">echo</span> $x + $y;
+</code></pre>
+
+<h2 id="echo-and-print">Echo and Print</h2>
+<p>Differences are small: echo has no return value while print has a return value of 1 so it can be used in expressions.
+    Echo can take multiple parameters (rare) while print can only take one argument. Echo is a tiny bit faster than
+    print.</p>
+<p>Echo and print can be called with or without ().</p>
+<p>Syntax for using them is the same.</p>
+<h1 id="scope">Scope</h1>
+<p>There are three: Local, global, and static.</p>
+<p>Vars outside of functions are global, and can only be accessed <strong>outside</strong> a function.
+    Vars inside of functions are local, and only exist for that function.</p>
+<blockquote>
+    <p>Use the <strong>global</strong> keyword to access global vars in a function. All global vars are stored in an
+        array called $GLOBAL. </p>
+</blockquote>
+<p>Static vars continue to exist, even after the function they were declared in finishes.</p>
+<pre><code class="lang-php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">myTest</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">static</span> $x = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">echo</span> $x;
+  $x++;
+}
+
+myTest();
+myTest();
+myTest();
+</code></pre>
+<blockquote>
+    <p>The var $x is only assigned 0 once, but will continue to increase in value, so the output is 1, 2, 3.</p>
+</blockquote>
+<h1 id="data-types">Data types</h1>
+<p>PHP is loosely typed. Automatically assigns data types based on the data. Type declarations were added in PHP 7.</p>
+<ul>
+    <li>String</li>
+    <li>Integer</li>
+    <li>Float (floating point numbers - also called double)</li>
+    <li>Boolean</li>
+    <li>Array</li>
+    <li>Object</li>
+    <li>NULL</li>
+    <li>Resource</li>
+</ul>
+<p>To find the type, use <code>var_dump()</code></p>
+<pre><code class="lang-php"><span class="hljs-meta"><span class="hljs-meta-keyword">$x</span> = 5;</span>
+var_dump(<span class="hljs-symbol">$</span>x);
+<span class="hljs-comment">// this will return int</span>
+</code></pre>
+<p>Assign multiple values:</p>
+<pre><code class="lang-php">$x = $y = $z = <span class="hljs-string">"Fruit"</span><span class="hljs-comment">;</span>
+</code></pre>
+<h2 id="arrays">Arrays</h2>
+<pre><code class="lang-php">$cars = <span class="hljs-built_in">array</span>(<span class="hljs-string">"Volvo"</span>,<span class="hljs-string">"BMW"</span>,<span class="hljs-string">"Toyota"</span>);
+var_dump($cars);
+</code></pre>
+<h2 id="objects">Objects</h2>
+<p>Classes and objects are two main aspects of OOP.</p>
+<p>Blah blah blah, OOP nonense.</p>
+<p>If you create a <code>__construct()</code> function, PHP automatically calls it when you create an object from that
+    class.</p>
+<pre><code class="lang-php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Car</span> </span>{
+  <span class="hljs-keyword">public</span> $color;
+  <span class="hljs-keyword">public</span> $model;
+  <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">($color, $model)</span> </span>{
+    <span class="hljs-keyword">$this</span>-&gt;color = $color;
+    <span class="hljs-keyword">$this</span>-&gt;model = $model;
+  }
+  <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">message</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"My car is a "</span> . <span class="hljs-keyword">$this</span>-&gt;color . <span class="hljs-string">" "</span> . <span class="hljs-keyword">$this</span>-&gt;model . <span class="hljs-string">"!"</span>;
+  }
+}
+
+$myCar = <span class="hljs-keyword">new</span> Car(<span class="hljs-string">"red"</span>, <span class="hljs-string">"Volvo"</span>);
+var_dump($myCar);
+</code></pre>
+<h2 id="null">Null</h2>
+<p>Vars are instantiated to null if they are not given a value. Also used for &#39;emptying&#39; a var.</p>
+<h2 id="change-a-data-type">Change a data type</h2>
+<p>You can re-use a variable with a different data type by re-assigning it:</p>
+<pre><code class="lang-php"><span class="hljs-meta"><span class="hljs-meta-keyword">$x</span> = 5;</span>
+var_dump(<span class="hljs-symbol">$</span>x);
+
+<span class="hljs-meta"><span class="hljs-meta-keyword">$x</span> = "Hello";</span>
+var_dump(<span class="hljs-symbol">$</span>x);
+</code></pre>
+<blockquote>
+    <p>Seems dangerous.</p>
+</blockquote>
+<h2 id="resource">Resource</h2>
+<p>A special resource type is not an actual data type. It stores a reference to functions and resources external to PHP.
+    A common example is using the resource type as a database call.</p>
+<h2 id="strings">Strings</h2>
+<p>Double quotes process special characters, single quotes do not. So, using a var in double quotes will output the
+    value, but using single quotes will just output the name of the var.</p>
+<pre><code class="lang-php"><span class="hljs-variable">$x</span> = <span class="hljs-string">"John"</span>;
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Hello <span class="hljs-variable">$x</span>"</span>;
+// Hello John
+</code></pre>
+<pre><code class="lang-php"><span class="hljs-variable">$x</span> = <span class="hljs-string">"John"</span>;
+echo <span class="hljs-string">'Hello $x'</span>;
+<span class="hljs-regexp">//</span> Hello <span class="hljs-variable">$x</span>
+</code></pre>
+<p>Function <code>strlen()</code> returns the length of a string.</p>
+<p><code>str_word_count()</code> returns the number of words in a string.</p>
+<p><code>strpos()</code> searches for text within a string.</p>
+<p><code>strtoupper()</code> returns the string in upper case. <code>strtolower()</code> returns lowercase.</p>
+<p><code>str_replace()</code> replaces some characters with some other characters in a string.</p>
+<pre><code class="lang-php"><span class="hljs-variable">$x</span> = <span class="hljs-string">"Hello World!"</span>;
+<span class="hljs-built_in">echo</span> str_replace(<span class="hljs-string">"World"</span>, <span class="hljs-string">"Dolly"</span>, <span class="hljs-variable">$x</span>);
+</code></pre>
+<p><code>strrev()</code> reverses a string. <code>trim()</code> removes white space.</p>
+<p><code>explode()</code> splits a string into an array. The first param represents the separator that you split the
+    array on, like a space.</p>
+<pre><code class="lang-php"><span class="hljs-built_in">$x</span> = <span class="hljs-string">"Hello World!"</span><span class="hljs-comment">;</span>
+<span class="hljs-built_in">$y</span> = explode(<span class="hljs-string">" "</span>, <span class="hljs-built_in">$x</span>)<span class="hljs-comment">;</span>
+
+<span class="hljs-comment">//Use the print_r() function to display the result:</span>
+print_r(<span class="hljs-built_in">$y</span>)<span class="hljs-comment">;</span>
+
+<span class="hljs-comment">/*
+Result:
+Array ( [0] =&gt; Hello [1] =&gt; World! )
+*/</span>
+</code></pre>
+<h2 id="numbers">Numbers</h2>
+<p>Int, Float, Number Strings, Infinity, and NaN.</p>
+<p>2, 256, -256, 10358, -179567 are all integers.</p>
+<p>Predefined constants:</p>
+<ul>
+    <li><code>PHP_INT_MAX</code> - The largest integer supported</li>
+    <li><code>PHP_INT_MIN</code> - The smallest integer supported</li>
+    <li><code>PHP_INT_SIZE</code> - The size of an integer in bytes</li>
+</ul>
+<p>Following functions to check if the type of a var is an integer:</p>
+<pre><code class="lang-php"><span class="hljs-keyword">is</span><span class="hljs-number">_</span>int()
+<span class="hljs-keyword">is</span><span class="hljs-number">_</span>integer() - <span class="hljs-keyword">alias</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">is</span><span class="hljs-number">_</span>int()
+<span class="hljs-keyword">is</span><span class="hljs-number">_</span>long - <span class="hljs-keyword">alias</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">is</span><span class="hljs-number">_</span>int()
+</code></pre>
+<p>2.0, 256.4, 10.358, 7.64E+5, 5.56E-5 are all floats.</p>
+<ul>
+    <li><code>PHP_FLOAT_MAX</code> - The largest representable floating point number</li>
+    <li><code>PHP_FLOAT_MIN</code> - The smallest representable positive floating point number</li>
+    <li><code>PHP_FLOAT_DIG</code> - The number of decimal digits that can be rounded into a float and back without
+        precision loss</li>
+    <li><code>PHP_FLOAT_EPSILON</code> - The smallest represent-able positive number x, so that x + 1.0 != 1.0
+        <pre><code class="lang-php"><span class="hljs-function"><span class="hljs-title">is_float</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"><span class="hljs-title">is_double</span><span class="hljs-params">()</span></span> - alias of is_float()
+</code></pre>
+    </li>
+</ul>
+<p>Any value larger than <code>PHP_FLOAT_MAX</code> is &quot;infinite&quot;. The number isn&#39;t, but the data type
+    &quot;is&quot;.</p>
+<pre><code class="lang-php"><span class="hljs-meta"><span class="hljs-meta-keyword">$x</span> = 1.9e411;</span>
+var_dump(<span class="hljs-symbol">$</span>x);
+</code></pre>
+<p>NaN is not a number. Enough said. Used for impossible math operations.</p>
+<pre><code class="lang-php"><span class="hljs-function"><span class="hljs-title">is_nan</span><span class="hljs-params">()</span></span>
+</code></pre>
+<p>You can use <code>is_numeric</code> to check if a string or other value is numeric or not.</p>
+<pre><code class="lang-php">$x = <span class="hljs-string">"5985"</span><span class="hljs-comment">;</span>
+var_dump(is_numeric($x))<span class="hljs-comment">;</span>
+</code></pre>
+<h2 id="casting">Casting</h2>
+<pre><code class="lang-php">// Cast float <span class="hljs-keyword">to</span> <span class="hljs-built_in">int</span>
+$x = <span class="hljs-number">23465.768</span><span class="hljs-comment">;</span>
+$int_cast = (<span class="hljs-built_in">int</span>)$x<span class="hljs-comment">;</span>
+echo $int_cast<span class="hljs-comment">;</span>
+
+echo <span class="hljs-string">"&lt;br&gt;"</span><span class="hljs-comment">;</span>
+
+// Cast <span class="hljs-built_in">string</span> <span class="hljs-keyword">to</span> <span class="hljs-built_in">int</span>
+$x = <span class="hljs-string">"23465.768"</span><span class="hljs-comment">;</span>
+$int_cast = (<span class="hljs-built_in">int</span>)$x<span class="hljs-comment">;</span>
+echo $int_cast<span class="hljs-comment">;</span>
+</code></pre>
+<p>Cast with the following statements:</p>
+<ul>
+    <li><code>(string)</code> - Converts to data type String</li>
+    <li><code>(int)</code> - Converts to data type Integer</li>
+    <li><code>(float)</code> - Converts to data type Float</li>
+    <li><code>(bool)</code> - Converts to data type Boolean</li>
+    <li><code>(array)</code> - Converts to data type Array</li>
+    <li><code>(object)</code> - Converts to data type Object</li>
+    <li><code>(unset)</code> - Converts to data type NULL
+        When converting to an array, most types turn into an array of that type with one element. Objects becomes
+        Key-Value pairs (associative arrays) where the property values become the value. NULL creates an empty array.
+    </li>
+</ul>
+<p>When converting to bool, everything becomes try except for 0, NULL, false, or empty.</p>
+<p>When converting to object, most become an object with one property named &#39;scalar&#39;, the var value becoming the
+    value of &#39;scalar&#39;.</p>
+<h2 id="constants">Constants</h2>
+<p>A constant starts with a letter or underscore, no <code>$</code>. To create one use <code>define()</code>.</p>
+<pre><code class="lang-php"><span class="hljs-comment">// syntax</span>
+<span class="hljs-class"><span class="hljs-keyword">define</span></span>(name, value, <span class="hljs-keyword">case</span><span class="hljs-params">-insensitive</span>);
+
+<span class="hljs-comment">// example</span>
+<span class="hljs-class"><span class="hljs-keyword">define</span></span>(<span class="hljs-string">"GREETING"</span>, <span class="hljs-string">"Welcome to W3Schools.com!"</span>);
+echo GREETING;
+</code></pre>
+<p>Or, using the <code>const</code> keyword:</p>
+<pre><code class="lang-php">const MYCAR = <span class="hljs-string">"Volvo"</span><span class="hljs-comment">;</span>
+echo MYCAR<span class="hljs-comment">;</span>
+</code></pre>
+<blockquote>
+    <p><strong><code>const</code> vs. <code>define()</code></strong></p>
+    <ul>
+        <li><code>const</code> are always case-sensitive</li>
+        <li><code>define()</code> has has a case-insensitive option.</li>
+        <li><code>const</code> cannot be created inside another block scope, like inside a function or inside an
+            <code>if</code> statement.
+        </li>
+        <li><code>define</code> can be created inside another block scope.</li>
+    </ul>
+</blockquote>
+<h2 id="constant-arrays">Constant Arrays</h2>
+<p>You can also create a const array using the <code>define()</code> function. I prefer the <code>const</code> keyword
+    as it&#39;s more clear.</p>
+<pre><code class="lang-php"><span class="hljs-class"><span class="hljs-keyword">define</span></span>(<span class="hljs-string">"cars"</span>, <span class="hljs-meta">[</span>
+  <span class="hljs-string">"Alfa Romeo"</span>,
+  <span class="hljs-string">"BMW"</span>,
+  <span class="hljs-string">"Toyota"</span>
+<span class="hljs-meta">]</span>);
+echo cars<span class="hljs-meta">[</span><span class="hljs-number">0</span><span class="hljs-meta">]</span>;
+</code></pre>
+<p>All constants are global all the time. They don&#39;t need to use the <code>global</code> keyword to be accessed
+    inside functions. They can also be defined in a local function, and they continue to exist <strong>after</strong>
+    the local function dies.</p>
+<h1 id="magic-constants">Magic Constants</h1>
+<p>PHP has 9 constants for things. They change value depending on the context, thus &quot;magic&quot;. Written with a
+    double underscore except for one. These are not case sensitive.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Constant</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>CLASS</strong></td>
+            <td>If used inside a class, the class name is returned.</td>
+            <td><a href="https://www.w3schools.com/php/phptryit.asp?filename=tryphp_const_class">Try it »</a></td>
+        </tr>
+        <tr>
+            <td><strong>DIR</strong></td>
+            <td>The directory of the file.</td>
+            <td><a href="https://www.w3schools.com/php/phpshowit.php?filename=tryphp_const_dir">Try it »</a></td>
+        </tr>
+        <tr>
+            <td><strong>FILE</strong></td>
+            <td>The file name including the full path.</td>
+            <td><a href="https://www.w3schools.com/php/phpshowit.php?filename=tryphp_const_file">Try it »</a></td>
+        </tr>
+        <tr>
+            <td><strong>FUNCTION</strong></td>
+            <td>If inside a function, the function name is returned.</td>
+            <td><a href="https://www.w3schools.com/php/phptryit.asp?filename=tryphp_const_function">Try it »</a></td>
+        </tr>
+        <tr>
+            <td><strong>LINE</strong></td>
+            <td>The current line number.</td>
+            <td><a href="https://www.w3schools.com/php/phptryit.asp?filename=tryphp_const_line">Try it »</a></td>
+        </tr>
+        <tr>
+            <td><strong>METHOD</strong></td>
+            <td>If used inside a function that belongs to a class, both class and function name is returned.</td>
+            <td><a href="https://www.w3schools.com/php/phptryit.asp?filename=tryphp_const_method">Try it »</a></td>
+        </tr>
+        <tr>
+            <td><strong>NAMESPACE</strong></td>
+            <td>If used inside a namespace, the name of the namespace is returned.</td>
+            <td><a href="https://www.w3schools.com/php/phptryit.asp?filename=tryphp_const_namespace">Try it »</a></td>
+        </tr>
+        <tr>
+            <td><strong>TRAIT</strong></td>
+            <td>If used inside a trait, the trait name is returned.</td>
+            <td><a href="https://www.w3schools.com/php/phptryit.asp?filename=tryphp_const_trait">Try it »</a></td>
+        </tr>
+        <tr>
+            <td>ClassName::class</td>
+            <td>Returns the name of the specified class and the name of the namespace, if any.</td>
+            <td><a href="https://www.w3schools.com/php/phptryit.asp?filename=tryphp_const_classname">Try it »</a></td>
+        </tr>
+    </tbody>
+</table>
+<h1 id="operators">Operators</h1>
+<h2 id="arithmetic">Arithmetic</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Operator</th>
+            <th>Name</th>
+            <th>Example</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>+</td>
+            <td>Addition</td>
+            <td>$x + $y</td>
+            <td>Sum of $x and $y</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>Subtraction</td>
+            <td>$x - $y</td>
+            <td>Difference of $x and $y</td>
+        </tr>
+        <tr>
+            <td>*</td>
+            <td>Multiplication</td>
+            <td>$x * $y</td>
+            <td>Product of $x and $y</td>
+        </tr>
+        <tr>
+            <td>/</td>
+            <td>Division</td>
+            <td>$x / $y</td>
+            <td>Quotient of $x and $y</td>
+        </tr>
+        <tr>
+            <td>%</td>
+            <td>Modulus</td>
+            <td>$x % $y</td>
+            <td>Remainder of $x divided by $y</td>
+        </tr>
+        <tr>
+            <td>**</td>
+            <td>Exponentiation</td>
+            <td>$x ** $y</td>
+            <td>Result of raising $x to the $y&#39;th power</td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="assignment">Assignment</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Assignment</th>
+            <th>Same as...</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>x = y</td>
+            <td>x = y</td>
+            <td>The left operand gets set to the value of the expression on the right</td>
+        </tr>
+        <tr>
+            <td>x += y</td>
+            <td>x = x + y</td>
+            <td>Addition</td>
+        </tr>
+        <tr>
+            <td>x -= y</td>
+            <td>x = x - y</td>
+            <td>Subtraction</td>
+        </tr>
+        <tr>
+            <td>x *= y</td>
+            <td>x = x * y</td>
+            <td>Multiplication</td>
+        </tr>
+        <tr>
+            <td>x /= y</td>
+            <td>x = x / y</td>
+            <td>Division</td>
+        </tr>
+        <tr>
+            <td>x %= y</td>
+            <td>x = x % y</td>
+            <td>Modulus</td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="comparison">Comparison</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Operator</th>
+            <th>Name</th>
+            <th>Example</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>==</td>
+            <td>Equal</td>
+            <td>$x == $y</td>
+            <td>Returns true if $x is equal to $y</td>
+        </tr>
+        <tr>
+            <td>===</td>
+            <td>Identical</td>
+            <td>$x === $y</td>
+            <td>Returns true if $x is equal to $y, and they are of the same type</td>
+        </tr>
+        <tr>
+            <td>!=</td>
+            <td>Not equal</td>
+            <td>$x != $y</td>
+            <td>Returns true if $x is not equal to $y</td>
+        </tr>
+        <tr>
+            <td>&lt;&gt;</td>
+            <td>Not equal</td>
+            <td>$x &lt;&gt; $y</td>
+            <td>Returns true if $x is not equal to $y</td>
+        </tr>
+        <tr>
+            <td>!==</td>
+            <td>Not identical</td>
+            <td>$x !== $y</td>
+            <td>Returns true if $x is not equal to $y, or they are not of the same type</td>
+        </tr>
+        <tr>
+            <td>&gt;</td>
+            <td>Greater than</td>
+            <td>$x &gt; $y</td>
+            <td>Returns true if $x is greater than $y</td>
+        </tr>
+        <tr>
+            <td>&lt;</td>
+            <td>Less than</td>
+            <td>$x &lt; $y</td>
+            <td>Returns true if $x is less than $y</td>
+        </tr>
+        <tr>
+            <td>&gt;=</td>
+            <td>Greater than or equal to</td>
+            <td>$x &gt;= $y</td>
+            <td>Returns true if $x is greater than or equal to $y</td>
+        </tr>
+        <tr>
+            <td>&lt;=</td>
+            <td>Less than or equal to</td>
+            <td>$x &lt;= $y</td>
+            <td>Returns true if $x is less than or equal to $y</td>
+        </tr>
+        <tr>
+            <td>&lt;=&gt;</td>
+            <td>Spaceship</td>
+            <td>$x &lt;=&gt; $y</td>
+            <td>Returns an integer less than, equal to, or greater than zero, depending on if $x is less than, equal to,
+                or greater than $y. Introduced in PHP 7.</td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="increment-decrement">Increment/Decrement</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Operator</th>
+            <th>Same as...</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>++$x</td>
+            <td>Pre-increment</td>
+            <td>Increments $x by one, then returns $x</td>
+        </tr>
+        <tr>
+            <td>$x++</td>
+            <td>Post-increment</td>
+            <td>Returns $x, then increments $x by one</td>
+        </tr>
+        <tr>
+            <td>--$x</td>
+            <td>Pre-decrement</td>
+            <td>Decrements $x by one, then returns $x</td>
+        </tr>
+        <tr>
+            <td>$x--</td>
+            <td>Post-decrement</td>
+            <td>Returns $x, then decrements $x by one</td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="logical">Logical</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Operator</th>
+            <th>Name</th>
+            <th>Example</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>and</td>
+            <td>And</td>
+            <td>$x and $y</td>
+            <td>True if both $x and $y are true</td>
+        </tr>
+        <tr>
+            <td>or</td>
+            <td>Or</td>
+            <td>$x or $y</td>
+            <td>True if either $x or $y is true</td>
+        </tr>
+        <tr>
+            <td>xor</td>
+            <td>Xor</td>
+            <td>$x xor $y</td>
+            <td>True if either $x or $y is true, but not both</td>
+        </tr>
+        <tr>
+            <td>&amp;&amp;</td>
+            <td>And</td>
+            <td>$x &amp;&amp; $y</td>
+            <td>True if both $x and $y are true</td>
+        </tr>
+        <tr>
+            <td>\</td>
+            <td></td>
+            <td>Or</td>
+            <td>$x \</td>
+            <td>$y</td>
+            <td>True if either $x or $y is true</td>
+        </tr>
+        <tr>
+            <td>!</td>
+            <td>Not</td>
+            <td>!$x</td>
+            <td>True if $x is not true</td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="string">String</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Operator</th>
+            <th>Name</th>
+            <th>Example</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>.</td>
+            <td>Concatenation</td>
+            <td>$txt1 . $txt2</td>
+            <td>Concatenation of $txt1 and $txt2</td>
+        </tr>
+        <tr>
+            <td>.=</td>
+            <td>Concatenation assignment</td>
+            <td>$txt1 .= $txt2</td>
+            <td>Appends $txt2 to $txt1</td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="array">Array</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Operator</th>
+            <th>Name</th>
+            <th>Example</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>+</td>
+            <td>Union</td>
+            <td>$x + $y</td>
+            <td>Union of $x and $y</td>
+        </tr>
+        <tr>
+            <td>==</td>
+            <td>Equality</td>
+            <td>$x == $y</td>
+            <td>Returns true if $x and $y have the same key/value pairs</td>
+        </tr>
+        <tr>
+            <td>===</td>
+            <td>Identity</td>
+            <td>$x === $y</td>
+            <td>Returns true if $x and $y have the same key/value pairs in the same order and of the same types</td>
+        </tr>
+        <tr>
+            <td>!=</td>
+            <td>Inequality</td>
+            <td>$x != $y</td>
+            <td>Returns true if $x is not equal to $y</td>
+        </tr>
+        <tr>
+            <td>&lt;&gt;</td>
+            <td>Inequality</td>
+            <td>$x &lt;&gt; $y</td>
+            <td>Returns true if $x is not equal to $y</td>
+        </tr>
+        <tr>
+            <td>!==</td>
+            <td>Non-identity</td>
+            <td>$x !== $y</td>
+            <td>Returns true if $x is not identical to $y</td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="conditional">Conditional</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Operator</th>
+            <th>Name</th>
+            <th>Example</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>?:</td>
+            <td>Ternary</td>
+            <td>$x = <em>expr1</em> ? <em>expr2</em> : <em>expr3</em></td>
+            <td>Returns the value of $x. <br>The value of $x is <em>expr2</em> if <em>expr1</em> = TRUE. <br>The value
+                of $x is <em>expr3</em> if <em>expr1</em> = FALSE</td>
+        </tr>
+        <tr>
+            <td>??</td>
+            <td>Null coalescing</td>
+            <td>$x = <em>expr1</em> ?? <em>expr2</em></td>
+            <td>Returns the value of $x. <br>The value of $x is <em>expr1</em> if <em>expr1</em> exists, and is not
+                NULL. <br>If <em>expr1</em> does not exist, or is NULL, the value of $x is <em>expr2</em>.
+                <br>Introduced in PHP 7
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h1 id="if-else">If, else</h1>
+<pre><code class="lang-php"><span class="hljs-keyword">if</span> (<span class="hljs-variable">$t</span> &lt; <span class="hljs-string">"20"</span>) {
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">"Have a good day!"</span>;
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">"Have a good night!"</span>;
+}
+</code></pre>
+<h2 id="shorthand">Shorthand</h2>
+<p>Shorthand if:</p>
+<pre><code class="lang-php"><span class="hljs-keyword">if</span> ($a &lt; <span class="hljs-number">10</span>) $b = <span class="hljs-string">"Hello"</span><span class="hljs-comment">;</span>
+</code></pre>
+<p>Shorthand if else:</p>
+<pre><code class="lang-php">$b = $a &lt; <span class="hljs-number">10</span> ? <span class="hljs-string">"Hello"</span> : <span class="hljs-string">"Good Bye"</span><span class="hljs-comment">;</span>
+</code></pre>
+<h1 id="switch">Switch</h1>
+<pre><code class="lang-php"><span class="hljs-keyword">switch</span> (expression) {
+  <span class="hljs-keyword">case</span> <span class="hljs-string">label1:</span>
+    <span class="hljs-comment">//code block</span>
+    <span class="hljs-keyword">break</span>;
+  <span class="hljs-keyword">case</span> <span class="hljs-string">label2:</span>
+    <span class="hljs-comment">//code block;</span>
+    <span class="hljs-keyword">break</span>;
+  <span class="hljs-keyword">case</span> <span class="hljs-string">label3:</span>
+    <span class="hljs-comment">//code block</span>
+    <span class="hljs-keyword">break</span>;
+<span class="hljs-symbol">  default:</span>
+    <span class="hljs-comment">//code block</span>
+}
+</code></pre>
+<h1 id="loops">Loops</h1>
+<h2 id="while">while</h2>
+<p>Break statement breaks out of a loop.
+    Continue stops the current iteration of the loop and continues to the next. The example below is bad.</p>
+<pre><code class="lang-php"><span class="hljs-variable">$i</span> = 1;
+<span class="hljs-keyword">while</span> (<span class="hljs-variable">$i</span> &lt; 6) {  
+  <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span>;
+  <span class="hljs-keyword">if</span>(<span class="hljs-variable">$i</span> == 3) <span class="hljs-built_in">break</span>;
+  <span class="hljs-keyword">if</span>(<span class="hljs-variable">$i</span> == 3) <span class="hljs-built_in">continue</span>;
+  <span class="hljs-variable">$i</span>++;
+}
+</code></pre>
+<p>Can be written like this as well but that&#39;s dumb.</p>
+<pre><code class="lang-php">$i = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">while</span> ($i &lt; <span class="hljs-number">6</span>):
+  <span class="hljs-keyword">echo</span> $i;
+  $i++;
+<span class="hljs-keyword">endwhile</span>;
+</code></pre>
+<h2 id="do-while">Do while</h2>
+<p>Executes once, all the time, but will only continue looping if the expression at the end is true.</p>
+<pre><code class="lang-php"><span class="hljs-variable">$i</span> = 1;
+
+<span class="hljs-keyword">do</span> {
+  <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span>;
+  <span class="hljs-variable">$i</span>++;
+} <span class="hljs-keyword">while</span> (<span class="hljs-variable">$i</span> &lt; 6);
+</code></pre>
+<h2 id="for">For</h2>
+<pre><code class="lang-php"><span class="hljs-keyword">for</span> (<span class="hljs-variable">$x</span> = 0; <span class="hljs-variable">$x</span> &lt;= 10; <span class="hljs-variable">$x</span>++) {
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">"The number is: <span class="hljs-variable">$x</span> &lt;br&gt;"</span>;
+}
+</code></pre>
+<h2 id="for-each">for each</h2>
+<pre><code class="lang-php">$colors = <span class="hljs-keyword">array</span>(<span class="hljs-string">"red"</span>, <span class="hljs-string">"green"</span>, <span class="hljs-string">"blue"</span>, <span class="hljs-string">"yellow"</span>);
+
+<span class="hljs-keyword">foreach</span> ($colors <span class="hljs-keyword">as</span> $x) {
+  <span class="hljs-keyword">echo</span> <span class="hljs-string">"$x &lt;br&gt;"</span>;
+}
+</code></pre>
+<h3 id="for-each-on-objects">for each on objects</h3>
+<pre><code class="lang-php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Car</span> </span>{
+  <span class="hljs-keyword">public</span> $color;
+  <span class="hljs-keyword">public</span> $model;
+  <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">($color, $model)</span> </span>{
+    <span class="hljs-keyword">$this</span>-&gt;color = $color;
+    <span class="hljs-keyword">$this</span>-&gt;model = $model;
+  }
+}
+
+$myCar = <span class="hljs-keyword">new</span> Car(<span class="hljs-string">"red"</span>, <span class="hljs-string">"Volvo"</span>);
+
+<span class="hljs-keyword">foreach</span> ($myCar <span class="hljs-keyword">as</span> $x =&gt; $y) {
+  <span class="hljs-keyword">echo</span> <span class="hljs-string">"$x: $y &lt;br&gt;"</span>;
+}
+</code></pre>
+<h1 id="functions">Functions</h1>
+<p>This includes an argument with a default value and return value.</p>
+<pre><code class="lang-php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">myMessage</span><span class="hljs-params">($fname = <span class="hljs-string">"evan"</span>)</span> </span>{
+  <span class="hljs-keyword">echo</span> <span class="hljs-string">"Hello world, and $fname"</span>;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+myMessage();
+myMessage(<span class="hljs-string">"Sarah"</span>);
+</code></pre>
+<h2 id="pass-by-reference-">Pass by reference:</h2>
+<pre><code class="lang-php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add_five</span><span class="hljs-params">(&amp;$value)</span> </span>{
+  $value += <span class="hljs-number">5</span>;
+}
+
+$num = <span class="hljs-number">2</span>;
+add_five($num);
+<span class="hljs-keyword">echo</span> $num;
+</code></pre>
+<p>Useful for passing in a variable and changing it. If it was passing it in as a value, you&#39;d have to do this:</p>
+<pre><code class="lang-php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add_five</span><span class="hljs-params">($value)</span></span>{
+   <span class="hljs-keyword">return</span> $value + <span class="hljs-number">5</span>;
+}
+$num = <span class="hljs-number">2</span>;
+$num = add_five($num);
+<span class="hljs-keyword">echo</span> $num;
+</code></pre>
+<p>Also, &quot;add_five&quot; in this case is misleading as we&#39;re not adding 5 to the variable we&#39;re passing in,
+    just it&#39;s value, so it could be a bad name as well. &quot;return_with_five_added&quot; is a better, albeit
+    lengthier, name.</p>
+<h2 id="variable-number-of-arguments">Variable number of arguments</h2>
+<p>Use <code>...</code> to accept an unknown number of parameters. Also called a variadic function.</p>
+<pre><code class="lang-php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sumMyNumbers</span><span class="hljs-params">(...$x)</span> </span>{
+  $n = <span class="hljs-number">0</span>;
+  $len = count($x);
+  <span class="hljs-keyword">for</span>($i = <span class="hljs-number">0</span>; $i &lt; $len; $i++) {
+    $n += $x[$i];
+  }
+  <span class="hljs-keyword">return</span> $n;
+}
+
+$a = sumMyNumbers(<span class="hljs-number">5</span>, <span class="hljs-number">2</span>, <span class="hljs-number">6</span>, <span class="hljs-number">2</span>, <span class="hljs-number">7</span>, <span class="hljs-number">7</span>);
+<span class="hljs-keyword">echo</span> $a;
+</code></pre>
+<p>The function arguments become an array. Hence, you can loop through them once called. Very handy for things like
+    adding an unknown number of values together.</p>
+<p>Won&#39;t lie though, why not just store the input in an array and pass that? Don&#39;t overthink it, I suppose.</p>
+<blockquote>
+    <p>It can only be on the very last argument, if you have more than one argument and the <code>...</code> operator is
+        not in front of the last, it raises an error.</p>
+</blockquote>
+<h1 id="strict-typing">Strict Typing</h1>
+<p>By default PHP is not strict and will allow you to loosely type parameters and vars.</p>
+<pre><code class="lang-php">function addNumbers(<span class="hljs-built_in">int</span> $a, <span class="hljs-built_in">int</span> $b) {
+  <span class="hljs-keyword">return</span> $a + $b<span class="hljs-comment">;</span>
+}
+echo addNumbers(<span class="hljs-number">5</span>, <span class="hljs-string">"5 days"</span>)<span class="hljs-comment">;</span>
+// since strict is <span class="hljs-literal">NOT</span> enabled <span class="hljs-string">"5 days"</span> is changed <span class="hljs-keyword">to</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">5</span>), <span class="hljs-literal">and</span> it will <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>
+</code></pre>
+<p>Add &quot;Strict&quot; to the first line of a PHP file to ensure types have to match:</p>
+<pre><code class="lang-php"><span class="php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">declare</span>(strict_types=<span class="hljs-number">1</span>); <span class="hljs-comment">// strict requirement</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addNumbers</span><span class="hljs-params">(int $a, int $b)</span> </span>{
+  <span class="hljs-keyword">return</span> $a + $b;
+}
+<span class="hljs-keyword">echo</span> addNumbers(<span class="hljs-number">5</span>, <span class="hljs-string">"5 days"</span>);
+<span class="hljs-comment">// since strict is enabled and "5 days" is not an integer, an error will be thrown</span>
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre>
+<p>Same can be done for return types.</p>
+<h1 id="arrays">Arrays</h1>
+<p>PHP has three array types:</p>
+<ul>
+    <li><a href="https://www.w3schools.com/php/php_arrays_indexed.asp"><strong>Indexed arrays</strong></a> - Arrays with
+        a numeric index</li>
+    <li><a href="https://www.w3schools.com/php/php_arrays_associative.asp"><strong>Associative arrays</strong></a> -
+        Arrays with named keys</li>
+    <li><a href="https://www.w3schools.com/php/php_arrays_multidimensional.asp"><strong>Multidimensional
+                arrays</strong></a> - Arrays containing one or more arrays
+        I already know what these are. Syntax is obvious.
+        <pre><code class="lang-php"><span class="hljs-comment">// indexed</span>
+$cars = <span class="hljs-built_in">array</span>(<span class="hljs-string">"Volvo"</span>, <span class="hljs-string">"BMW"</span>, <span class="hljs-string">"Toyota"</span>);
+var_dump($cars);
+</code></pre>
+    </li>
+</ul>
+<pre><code class="lang-php"><span class="hljs-comment">// associative</span>
+$car = <span class="hljs-keyword">array</span>(<span class="hljs-string">"brand"</span>=&gt;<span class="hljs-string">"Ford"</span>, <span class="hljs-string">"model"</span>=&gt;<span class="hljs-string">"Mustang"</span>, <span class="hljs-string">"year"</span>=&gt;<span class="hljs-number">1964</span>);
+var_dump($car);
+</code></pre>
+<pre><code class="lang-php"><span class="hljs-comment">// multidimensional</span>
+$cars = array (
+  array(<span class="hljs-string">"Volvo"</span>,<span class="hljs-number">22</span>,<span class="hljs-number">18</span>),
+  array(<span class="hljs-string">"BMW"</span>,<span class="hljs-number">15</span>,<span class="hljs-number">13</span>),
+  array(<span class="hljs-string">"Saab"</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>),
+  array(<span class="hljs-string">"Land Rover"</span>,<span class="hljs-number">17</span>,<span class="hljs-number">15</span>)
+);
+</code></pre>
+<h1 id="super-globals">Super Globals</h1>
+<p>PHP has to globals that can be accessed anywhere, anytime.</p>
+<ul>
+    <li>$GLOBALS<ul>
+            <li>Used to access user defined global vars</li>
+        </ul>
+    </li>
+    <li>$_SERVER<ul>
+            <li>holds info about about header, paths, script locations</li>
+        </ul>
+    </li>
+    <li>$_REQUEST<ul>
+            <li>contains submitted form data, cookie data, etc.</li>
+        </ul>
+    </li>
+    <li>$_POST<ul>
+            <li>contains an array of vars received via the HTTP POST method.</li>
+        </ul>
+    </li>
+    <li>$_GET<ul>
+            <li>contains an array of vars received via the HTTP GET method.</li>
+        </ul>
+    </li>
+    <li>$_FILES</li>
+    <li>$_ENV</li>
+    <li>$_COOKIE</li>
+    <li>$_SESSION<h1 id="regex">Regex</h1>
+        regular expressions are strings compose of delimiters, a pattern and optional modifiers.
+        <pre><code class="lang-php">$<span class="hljs-built_in">exp</span> = <span class="hljs-string">"/w3schools/i"</span>;
+</code></pre>
+    </li>
+</ul>
+<p>Some functions:</p>
+<table>
+    <thead>
+        <tr>
+            <th>function</th>
+            <th>desc</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>preg_match()</td>
+            <td>Returns 1 if the pattern was found in the string and 0 if not</td>
+        </tr>
+        <tr>
+            <td>preg_match_all()</td>
+            <td>Returns the number of times the pattern was found in the string, which may also be 0</td>
+        </tr>
+        <tr>
+            <td>preg_replace()</td>
+            <td>Returns a new string where matched patterns have been replaced with another string</td>
+        </tr>
+    </tbody>
+</table>
+<p>Examples:</p>
+<pre><code class="lang-php"><span class="hljs-variable">$str</span> = <span class="hljs-string">"Visit W3Schools"</span>;
+<span class="hljs-variable">$pattern</span> = <span class="hljs-string">"/w3schools/i"</span>;
+<span class="hljs-built_in">echo</span> preg_match(<span class="hljs-variable">$pattern</span>, <span class="hljs-variable">$str</span>);
+</code></pre>
+<pre><code class="lang-php"><span class="hljs-variable">$str</span> = <span class="hljs-string">"The rain in SPAIN falls mainly on the plains."</span>;
+<span class="hljs-variable">$pattern</span> = <span class="hljs-string">"/ain/i"</span>;
+<span class="hljs-built_in">echo</span> preg_match_all(<span class="hljs-variable">$pattern</span>, <span class="hljs-variable">$str</span>);
+</code></pre>
+<pre><code class="lang-php"><span class="hljs-variable">$str</span> = <span class="hljs-string">"Visit Microsoft!"</span>;
+<span class="hljs-variable">$pattern</span> = <span class="hljs-string">"/microsoft/i"</span>;
+<span class="hljs-built_in">echo</span> preg_replace(<span class="hljs-variable">$pattern</span>, <span class="hljs-string">"W3Schools"</span>, <span class="hljs-variable">$str</span>);
+</code></pre>
+<p>And that&#39;s it for PHP.</p>
