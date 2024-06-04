@@ -1,4 +1,22 @@
-# Blazor Starter Application
+# Blazor Starter Application Example
+
+This is an example app I built using the starter template (linked below) from Microsoft.
+
+[Visit the site here](https://salmon-wave-0a9f84f10.5.azurestaticapps.net/)
+
+The template builds most of the base functionality and showcases how to use it. 
+Things I added or changed:
+- Added new pages
+- Removed the two example pages, "Counter" and "Weather" from the nav bar. Kept the files around just for reference.
+- Added new links to the nav for the pages
+- Added styling to indent the links on the nav so it appears as a tree structure
+- Added a markdown -> HTML parser library, which I ended up not using (head to /InterviewPrep/CSharMark to see it, not much there other than markdown but it works)
+- Added some styling to adjust tables (which overlap on mobile but what are you gonna do, I was developing desktop-first and was on a pretty tight schedule)
+- Added styling to change the background color of the page and navbar, just to showcase I could find my way around the app
+- Lastly, added two links, one to my website and one to this github repo, in the top navbar.
+
+# Blazor Starter Application Template
+The rest of the read me file is from the template, not I.
 
 This template contains an example .NET 8 [Blazor WebAssembly](https://docs.microsoft.com/aspnet/core/blazor/?view=aspnetcore-6.0#blazor-webassembly) client application, a .NET 8 C# [Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-overview), and a C# class library with shared code.
 
