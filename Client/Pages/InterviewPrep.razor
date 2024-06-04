@@ -1,6 +1,8 @@
 @page "/InterviewPrep"
 
+<PageTitle>Interview Prep</PageTitle>
 <h1>Interview Preparation</h1>
+
 
 <p>Links to Interview prep pages.</p>
 
@@ -12,3 +14,136 @@
     <li><a href="/InterviewPrep/Sharepoint">Sharepoint Notes</a></li>
     <li><a href="/InterviewPrep/Sql">SQL Notes</a></li>
 </ul>
+
+<h1 id="other-topics">Other topics</h1>
+<p>Topics that are small enough they don&#39;t need their own page.</p>
+<h2 id="data-lakes">Data lakes</h2>
+<p>A centralized repository that allows you to store all your structured and unstructured data at any scale.</p>
+<h3 id="what-they-are">What they are</h3>
+<p>They are central repos that can store large amounts of data in their original form and then process said data and use
+    it for a variety of use cases.</p>
+<p>The data is typically stored in zones (raw, cleansed, curated) so different users have access to what they need and
+    not what they don&#39;t. </p>
+<p>The type of data ranges from structured (databases, excel sheets) to semi-structured (XML files, web pages), and
+    unstructured (images, videos, tweets).</p>
+<h3 id="use-cases">Use cases</h3>
+<p>Finance, Healthcare, Sales, and supply chains all use data lakes to optimize their growth. This mostly comes from
+    data collection, using analytics and machine learning to improve algorithms and manage historical data.</p>
+<h3 id="data-lake-vs-data-warehouse">data lake vs. data warehouse</h3>
+<p>A warehouse is essentially just a more strict and structured approach. Often they are both used within a single org.
+</p>
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Data lake</th>
+            <th>Data warehouse</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Type</td>
+            <td>Structured, semi-structured, unstructured</td>
+            <td>Structured</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Relational, non-relational</td>
+            <td>Relational</td>
+        </tr>
+        <tr>
+            <td>Schema</td>
+            <td>Schema on read</td>
+            <td>Schema on write</td>
+        </tr>
+        <tr>
+            <td>Format</td>
+            <td>Raw, unfiltered</td>
+            <td>Processed, vetted</td>
+        </tr>
+        <tr>
+            <td>Sources</td>
+            <td>Big data, IoT, social media, streaming data</td>
+            <td>Application, business, transactional data, batch reporting</td>
+        </tr>
+        <tr>
+            <td>Scalability</td>
+            <td>Easy to scale at a low cost</td>
+            <td>Difficult and expensive to scale</td>
+        </tr>
+        <tr>
+            <td>Users</td>
+            <td>Data scientists, data engineers</td>
+            <td>Data warehouse professionals, business analysts</td>
+        </tr>
+        <tr>
+            <td>Use cases</td>
+            <td>Machine learning, predictive analytics, real-time analytics</td>
+            <td>Core reporting, BI</td>
+        </tr>
+    </tbody>
+</table>
+<h3 id="data-lake-vs-data-lakehouse">data lake vs. data lakehouse</h3>
+<p>Because lakes can store all sorts of data, it&#39;s easy for issues related to quality and performance to occur. A
+    poorly managed lake risks data integrity, bottlenecks, slow performance, and security risks.</p>
+<p>A lakehouse is an open standards-based storage solution. From my understanding, it&#39;s a lake combined with a
+    warehouse, so you don&#39;t need to accept and process the data in the lake and then store it in the warehouse,
+    it&#39;s all in one central location for processing and storage.</p>
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Data lake</th>
+            <th>Data lakehouse</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Type</td>
+            <td>Structured, semi-structured, unstructured</td>
+            <td>Structured, semi-structured, unstructured</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Relational, non-relational</td>
+            <td>Relational, non-relational</td>
+        </tr>
+        <tr>
+            <td>Schema</td>
+            <td>Schema on read</td>
+            <td>Schema on read, schema on write</td>
+        </tr>
+        <tr>
+            <td>Format</td>
+            <td>Raw, unfiltered, processed, curated</td>
+            <td>Raw, unfiltered, processed, curated, delta format files</td>
+        </tr>
+        <tr>
+            <td>Sources</td>
+            <td>Big data, IoT, social media, streaming data</td>
+            <td>Big data, IoT, social media, streaming data, application, business, transactional data, batch reporting
+            </td>
+        </tr>
+        <tr>
+            <td>Scalability</td>
+            <td>Easy to scale at a low cost</td>
+            <td>Easy to scale at a low cost</td>
+        </tr>
+        <tr>
+            <td>Users</td>
+            <td>Data scientists</td>
+            <td>Business analysts, data engineers, data scientists</td>
+        </tr>
+        <tr>
+            <td>Use cases</td>
+            <td>Machine learning, predictive analytics</td>
+            <td>Core reporting, BI, machine learning, predictive analytics</td>
+        </tr>
+    </tbody>
+</table>
+<h1 id="itil-certification">ITIL Certification</h1>
+<p>ITIL is a global framework to help improve customer experience. Mostly best practices for IT departments.</p>
+<p>It&#39;s ideal for IT department managers, and just furthering your career in general. Google offers a free
+    certification and is an ideal place to start. Unfortunately it does take about 3-6 months (at your own pace) and I
+    only heard about it today (2024-06-02) so I don&#39;t think I have time to go through the course before this Tuesday
+    (the 4th).</p>

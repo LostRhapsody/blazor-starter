@@ -101,3 +101,8 @@ a, .btn-link {
 code {
     color: #c02d76;
 }
+
+th, td {
+    padding: 1rem;
+    border: 1px solid #d6d5d5;
+}
